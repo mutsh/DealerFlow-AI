@@ -66,12 +66,14 @@ class LocalRouter:
                 self.model_id,
                 dtype="auto",
                 device_map="auto",
+                low_cpu_mem_usage=True,
             )
         else:
             self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_id,
                 dtype=torch.float32,
                 device_map={"": "cpu"},
+                low_cpu_mem_usage=True,
             )
 
         self.model.eval()
