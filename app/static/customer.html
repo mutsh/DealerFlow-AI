@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dealer Service Assistant</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">🚘</div>
+      <div>Dealer Service Assistant</div>
+    </div>
+    <a class="nav-link" href="/manager">Manager dashboard</a>
+  </header>
+
+  <main class="page chat-layout">
+    <section class="card chat-card">
+      <div class="chat-head">
+        <h1>Book your next service</h1>
+        <div class="subtle">Prices, availability, booking status and human support.</div>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="message agent">
+          Hello. I can help you check service prices, find appointment times,
+          manage bookings, or connect you with the service team.
+        </div>
+      </div>
+
+      <form class="composer" id="chatForm">
+        <input id="messageInput" autocomplete="off"
+               placeholder="e.g. I need an oil change on 2026-09-18 at 09:00">
+        <button class="primary" type="submit">Send</button>
+      </form>
+    </section>
+
+    <aside class="card side-card">
+      <h3>Quick actions</h3>
+      <div class="quick">
+        <button data-msg="How much does an oil change cost?">Check oil-change price</button>
+        <button data-msg="Is brake service available on 2026-09-18?">Check availability</button>
+        <button data-msg="I want to speak with a service advisor">Talk to a person</button>
+      </div>
+
+      <div class="notice">
+        This assistant uses AI. Appointment changes are only committed through
+        verified dealership tools and explicit confirmation.
+      </div>
+    </aside>
+  </main>
+</div>
+
+<script src="/static/customer.js"></script>
+</body>
+</html>

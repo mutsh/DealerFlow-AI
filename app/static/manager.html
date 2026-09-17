@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dealer AI Manager Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">📊</div>
+      <div>After-Sales AI Operations</div>
+    </div>
+    <a class="nav-link" href="/">Customer assistant</a>
+  </header>
+
+  <main class="page">
+    <div class="toolbar">
+      <input class="key-input" id="managerKey" type="password"
+             placeholder="Manager API key">
+      <button class="primary" id="loadBtn">Load dashboard</button>
+      <button class="secondary" id="refreshBtn">Refresh</button>
+      <span class="subtle" id="statusText"></span>
+    </div>
+
+    <section class="manager-grid">
+      <div class="card metric"><div class="label">All bookings</div><div class="value" id="mTotal">—</div></div>
+      <div class="card metric"><div class="label">Confirmed</div><div class="value" id="mConfirmed">—</div></div>
+      <div class="card metric"><div class="label">Cancelled</div><div class="value" id="mCancelled">—</div></div>
+      <div class="card metric"><div class="label">Handoffs</div><div class="value" id="mHandoffs">—</div></div>
+      <div class="card metric"><div class="label">Open handoffs</div><div class="value" id="mOpen">—</div></div>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-title">Recent bookings</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Booking</th><th>Customer</th><th>Service</th>
+              <th>Date</th><th>Time</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="bookingRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-title">Human handoffs</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Handoff</th><th>Customer</th><th>Reason</th>
+              <th>Status</th><th>Created</th>
+            </tr>
+          </thead>
+          <tbody id="handoffRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="/static/manager.js"></script>
+</body>
+</html>
