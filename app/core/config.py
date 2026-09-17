@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     app_name: str = "Dealer After-Sales AI"
     environment: str = "development"
-    model_id: str = "Qwen/Qwen2.5-1.5B-Instruct"
+    model_id: str = "Qwen/Qwen2.5-0.5B-Instruct"
     database_path: str = "data/dealer_agent.db"
     trace_path: str = "data/traces.jsonl"
     manager_api_key: str = "change-me"
