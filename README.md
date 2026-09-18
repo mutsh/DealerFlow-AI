@@ -14,11 +14,11 @@ The goal is not to build another chatbot demo. DealerFlow AI is structured aroun
 
 **build → test → deploy → monitor → debug → improve**
 
-The LLM handles language understanding and routing. Critical business operations remain typed, deterministic, confirmed, and observable.
+The routing layer is pluggable: the zero-key quick-start uses a lightweight deterministic router, while an optional local Qwen model can handle language understanding and routing. Critical business operations remain typed, deterministic, confirmed, and observable.
 
 ## Key capabilities
 
-- Local Hugging Face / Qwen routing model
+- Pluggable routing: lightweight zero-key mode + optional local Hugging Face/Qwen model
 - Multi-turn session state and working memory
 - Customer-facing web booking assistant
 - Dealership manager dashboard
@@ -49,7 +49,7 @@ Session / Working Memory
           ↓
      Guardrails
           ↓
-Local LLM Router
+Router (rules by default / local Qwen optional)
           ↓
 Agent Runtime / Policy
           ↓
@@ -86,7 +86,7 @@ cd DealerFlow-AI
 
 The scripts create a virtual environment, install dependencies, create `.env` from `.env.example` if needed, and start the application.
 
-The first launch downloads `Qwen/Qwen2.5-1.5B-Instruct`, so startup is slower the first time. CPU inference works but can be slow; an NVIDIA GPU is optional.
+The default quick-start does **not** download a model, so it runs on an ordinary laptop. To test local LLM routing, install `requirements-llm.txt`, set `ROUTER_MODE=local_llm` in `.env`, and restart. The optional default model is `Qwen/Qwen2.5-0.5B-Instruct`; CPU inference can be slow and requires additional memory.
 
 Open:
 
@@ -97,6 +97,18 @@ Open:
 - Readiness: `http://127.0.0.1:8000/ready`
 
 The manager dashboard uses the `MANAGER_API_KEY` in `.env`.
+
+## Optional local LLM routing
+
+The default `ROUTER_MODE=rules` is intentionally lightweight for CI, recruiter review, and laptops with limited memory. To enable the local Qwen router:
+
+```powershell
+python -m pip install -r requirements-llm.txt
+(Get-Content .env) -replace 'ROUTER_MODE=.*','ROUTER_MODE=local_llm' | Set-Content .env
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+If your machine has limited RAM/virtual memory, keep `ROUTER_MODE=rules`. The booking, confirmation, guardrail, handoff, persistence, tracing, dashboard, and tool-control layers are the same in both modes.
 
 ## Manual setup
 
